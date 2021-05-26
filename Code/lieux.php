@@ -1,7 +1,16 @@
 <?php
 require_once 'RecevoirDonnee.php';
+require_once 'auth.session.php';
+
+if (getSessionExiste()){
+    $Utilisateur = $_SESSION['infoAuth'];
+
+}
+echo $Utilisateur;
+
+
 $donnee = new classeDonnee();
-$donnee->getDonneesMySQL();
+$donnee->getDonneesMySQL($Utilisateur);
 ?>
 
 <!DOCTYPE html>

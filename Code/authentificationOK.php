@@ -5,7 +5,6 @@
  */
 
 require_once 'auth.session.php';
-    
     if (getSessionExiste()){
         $nom = $_SESSION['infoAuth'];
 

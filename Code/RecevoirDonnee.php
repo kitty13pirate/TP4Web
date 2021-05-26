@@ -1,16 +1,9 @@
 <?php
 require_once 'data/Connexion.abstract.php';
 require_once 'data/ConnexionAuthentification.classe.php';
-require_once 'auth.session.php';
     
-    if (getSessionExiste()){
-        $Utilisateur = $_SESSION['infoAuth'];
-
-    }
-    echo $Utilisateur;
-
     class classeDonnee{
-        public function getDonneesMySQL(){
+        public function getDonneesMySQL($Utilisateur){
             try{
                     
                 $cd = new ConnexionAuthentification();
@@ -24,6 +17,7 @@ require_once 'auth.session.php';
                 $pdoRequete->execute();
                 $enregistrements = $pdoRequete->fetchAll();
 
+                var_dump($enregistrements);
                 var_dump($enregistrements[0]);
                 var_dump($enregistrements[0][2]);
                     

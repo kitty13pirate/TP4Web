@@ -34,7 +34,7 @@ if (!isset($_POST['nom'],$_POST['mdp'])){
         //echo "C'est ok";
         require_once 'auth.session.php';
         setSession($nom);
-        header("Location: confirmationOK.php");
+        header("Location: choix.php");
     } else {
         /**
          * L'authentification est refusée.
