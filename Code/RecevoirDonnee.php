@@ -1,7 +1,7 @@
 <?php
 require_once 'data/Connexion.abstract.php';
 require_once 'data/ConnexionAuthentification.classe.php';
-    
+
     class classeDonnee{
         public function getDonneesMySQL($Utilisateur){
             try{
@@ -16,11 +16,8 @@ require_once 'data/ConnexionAuthentification.classe.php';
                 $pdoRequete->bindParam(":Utilisateur",$Utilisateur,PDO::PARAM_STR);
                 $pdoRequete->execute();
                 $enregistrements = $pdoRequete->fetchAll();
+                return $enregistrements;
 
-                var_dump($enregistrements);
-                var_dump($enregistrements[0]);
-                var_dump($enregistrements[0][2]);
-                    
             } catch (Exception $e) {
                 //error_log permet d'écrire dans le log d'erreur php.
                 error_log("Exception pdo: ".$e->getMessage());
@@ -30,6 +27,23 @@ require_once 'data/ConnexionAuthentification.classe.php';
             }
         }
 
+        public function writeForms($enregistrements){
+            for ($z = 1; $z <= count($enregistrements); $z++) {
+                $x = $z-1;
+                echo '<form action="choix.php">';
+                echo '<input type="hidden" id="number" name="number" value='.$enregistrements[$x][0]. '>';
+                echo '<label for="nomLieu">Nom du lieu</label>';
+                echo '<input type="text" id="nomLieu" name="nomLieu" value='.$enregistrements[$x][2].' readonly>';
+                echo '<label for="arrive">Date d\'arrivée</label>';
+                echo '<input type="datetime-local" id="arrive" name="arrive" value='.$enregistrements[$x][7].' readonly>';
+                echo '<label for="depart">Date de départ</label>';
+                echo '<input type="datetime-local" id="depart" name="depart" value='.$enregistrements[$x][8].' readonly>';
+                echo '<br>';
+                echo '<input type="submit" value="J\'avais une pathologie contagieuse durant cette visite"/>';
+                echo '</form>';
+            }
+
+        }
         
     }
 
